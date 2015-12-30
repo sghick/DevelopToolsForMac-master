@@ -111,7 +111,11 @@
 
 - (IBAction)helpBtnClick:(id)sender {
     SGConfigManager * manager = [SGConfigManager defaultConfigManager];
-    outputTextView.string = manager.curConfig.helpMsg;
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = manager.curConfig.helpMsg;
+    [alert addButtonWithTitle:@"确定"];
+    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+    }];
 }
 
 - (int)indexOfSearchText:(NSString *)searchText inArray:(NSArray *)array {

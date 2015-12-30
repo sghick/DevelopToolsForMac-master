@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>curItemName</key>
-	<string>Unicode2中文</string>
+	<string>1-Unicode2中文</string>
 	<key>configs</key>
 	<dict>
 		<key>1-Unicode2中文</key>
@@ -107,7 +107,7 @@
 			<key>outputType</key>
 			<string>1</string>
 			<key>inputString</key>
-			<string></string>
+			<string>bdweiche:</string>
 			<key>outputString</key>
 			<string>/Users/buding/Desktop/output.txt</string>
 		</dict>

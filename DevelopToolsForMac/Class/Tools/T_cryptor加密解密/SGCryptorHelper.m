@@ -9,6 +9,7 @@
 #import "SGCryptorHelper.h"
 #import "Cryptor.h"
 #import "SGConfigManager.h"
+#import <Cocoa/Cocoa.h>
 
 @implementation SGCryptorHelper
 
@@ -23,11 +24,20 @@
         NSString *key = inputs[0];
         NSString *searl = inputs[1];
         NSString *edes = [SGCryptorHelper encodeDESwithKey:key searl:searl];
-        NSLog(@"%@", edes);
+        NSString *result = [NSString stringWithFormat:@"%@\n%@:%@\n%@", [NSDate date], key, searl , edes];
+        NSLog(@"%@", result);
         SGConfigManager * manager = [SGConfigManager defaultConfigManager];
         if (manager.curConfig.outputType.intValue == 1 && manager.curConfig.outputString && manager.curConfig.outputString.length) {
-            [edes writeToFile:manager.curConfig.outputString atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            [result writeToFile:manager.curConfig.outputString atomically:YES encoding:NSUTF8StringEncoding error:nil];
         }
+        // 复制到剪切版
+//        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+//        [pasteboard setString:edes forType:NSPasteboardTypeString];
+//        NSAlert *alert = [[NSAlert alloc] init];
+//        alert.messageText = @"已经复制到剪切板";
+//        [alert addButtonWithTitle:@"确定"];
+//        [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+//        }];
         block(edes);
     }
 }

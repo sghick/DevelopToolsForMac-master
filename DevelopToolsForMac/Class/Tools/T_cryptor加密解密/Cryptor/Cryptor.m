@@ -218,7 +218,8 @@ static const short _base64DecodingTable[256] = {
 
 + (NSString *)decodeBase64:(NSString *)decodedString {
 	NSData * objData = [Cryptor decodeBase64WithUTF8String:decodedString];
-	return [[NSString alloc] initWithData:objData encoding:NSUTF8StringEncoding];
+	NSString *rtn = [[NSString alloc] initWithData:objData encoding:NSUTF8StringEncoding];
+    return [rtn copy];
 }
 
 + (NSString *)encodeDES:(NSString *)plainString key:(NSString *)key {
@@ -242,9 +243,9 @@ static const short _base64DecodingTable[256] = {
                                           &numBytesEncrypted);
     if (cryptStatus == kCCSuccess) {
         NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
-        ciphertext = [[Cryptor encodeBase64WithData:data] autorelease];
+        ciphertext = [Cryptor encodeBase64WithData:data];
     }
-    return ciphertext;
+    return [ciphertext copy];
 }
 
 + (NSString *)decodeDES:(NSString*)decodedString key:(NSString*)key {
